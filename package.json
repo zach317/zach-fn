@@ -21,7 +21,8 @@
   "homepage": "https://github.com/zach317/zach-fn#readme",
   "dependencies": {
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^6.30.1"
   },
   "devDependencies": {
     "@babel/core": "^7.27.3",
