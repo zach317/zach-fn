@@ -4,7 +4,7 @@ import Register from "@/auth/register";
 import UserLayout from "@/auth/user-layout";
 import Login from "@/auth/login";
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <Routes>
       <Route element={<UserLayout />}>

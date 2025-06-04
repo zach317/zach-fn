@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const pathResolve = (_path) => path.resolve(__dirname, _path);
 
 module.exports = {
-  entry: pathResolve("../src/index.jsx"),
+  entry: pathResolve("../src/index.tsx"),
   output: {
     path: pathResolve("../dist"),
     filename: "scripts/[name].[hash].bundle.js",
@@ -22,6 +22,11 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
     ],
   },
   plugins: [
@@ -32,7 +37,7 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: [".js", ".jsx", ".json"],
+    extensions: [".tsx", ".ts", ".js", ".jsx", ".json"],
     alias: {
       "@": pathResolve("../src/components"),
       "#": pathResolve("../src/common"),
