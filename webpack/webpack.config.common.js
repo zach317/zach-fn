@@ -10,6 +10,7 @@ module.exports = {
     path: pathResolve("../dist"),
     filename: "scripts/[name].[hash].bundle.js",
     clean: true,
+    assetModuleFilename: "images/[contenthash][ext]",
   },
   module: {
     rules: [
@@ -27,6 +28,18 @@ module.exports = {
         use: "ts-loader",
         exclude: /node_modules/,
       },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              outputPath: "images/",
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -34,6 +47,7 @@ module.exports = {
       template: pathResolve("../public/index.html"),
       filename: "index.html",
       title: "zach",
+      favicon: pathResolve("../public/favicon.ico"),
     }),
   ],
   resolve: {
@@ -41,6 +55,8 @@ module.exports = {
     alias: {
       "@": pathResolve("../src/components"),
       "#": pathResolve("../src/common"),
+      images: pathResolve("../src/images"),
+      utils: pathResolve("../src/utils"),
     },
   },
 };

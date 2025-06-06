@@ -4,12 +4,17 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "allowJs": true,
     "baseUrl": "./",
     "jsx": "react-jsx",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "paths": {
       "@/*": ["src/components/*"],
-      "#/*": ["src/common/*"]
-    },
+      "#/*": ["src/common/*"],
+      "images/*": ["src/images/*"],
+      "utils/*": ["src/utils/*"],
+    }
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "webpack", "**/*.js"]
 }
