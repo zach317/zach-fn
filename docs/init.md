@@ -19,7 +19,7 @@ public/
   └── index.html
 ```
 
-在 [public/index.html](file:///Users/zach/Desktop/mine/zach-fn/public/index.html) 文件中，确保包含以下内容：
+在 [public/index.html](../public/index.html) 文件中，确保包含以下内容：
 ```html
 <body>
   <div id="root"></div>

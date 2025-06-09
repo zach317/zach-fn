@@ -12,7 +12,7 @@ npm install --save-dev webpack-dev-server
 
 ### 基础配置
 
-初始配置文件 [webpack.config.js](file:///Users/zach/Desktop/mine/zach-fn/webpack/webpack.config.js) 示例，适用于项目起步阶段的基本打包需求：
+初始配置文件 [webpack.config.js](../webpack/webpack.config.js) 示例，适用于项目起步阶段的基本打包需求：
 
 ```javascript
 const path = require('path');
@@ -27,7 +27,7 @@ module.exports = {
 };
 ```
 
-在 [package.json](file:///Users/zach/Desktop/mine/zach-fn/node_modules/@babel/core/package.json) 中添加如下脚本命令，便于执行构建与启动开发服务器：
+在 [package.json](../package.json) 中添加如下脚本命令，便于执行构建与启动开发服务器：
 
 ```json
 "scripts": {
@@ -121,7 +121,7 @@ webpack/
 npm install --save-dev webpack-merge
 ```
 
-### 2. 公共配置 - [webpack.config.common.js](file:///Users/zach/Desktop/mine/zach-fn/webpack/webpack.config.common.js)
+### 2. 公共配置 - [webpack.config.common.js](../webpack/webpack.config.common.js)
 
 该文件包含所有环境通用的配置项，例如入口、输出、基础 loader 和插件：
 
@@ -165,7 +165,7 @@ module.exports = {
 };
 ```
 
-### 3. 开发环境配置 - [webpack.config.dev.js](file:///Users/zach/Desktop/mine/zach-fn/webpack/webpack.config.dev.js)
+### 3. 开发环境配置 - [webpack.config.dev.js](../webpack/webpack.config.dev.js)
 
 此配置专注于开发体验，启用热更新和本地服务器：
 
@@ -199,7 +199,7 @@ module.exports = {
 };
 ```
 
-### 4. 生产环境配置 - [webpack.config.prod.js](file:///Users/zach/Desktop/mine/zach-fn/webpack/webpack.config.prod.js)
+### 4. 生产环境配置 - [webpack.config.prod.js](../webpack/webpack.config.prod.js)
 
 此配置专注于性能优化和代码压缩，适合部署上线：
 
@@ -241,7 +241,7 @@ module.exports = {
 };
 ```
 
-### 5. 主配置文件 - [webpack.config.js](file:///Users/zach/Desktop/mine/zach-fn/webpack/webpack.config.js)
+### 5. 主配置文件 - [webpack.config.js](../webpack/webpack.config.js)
 
 根据不同的构建模式动态合并对应的配置：
 
@@ -263,9 +263,9 @@ module.exports = (env) => {
 };
 ```
 
-### 6. 更新 [package.json](file:///Users/zach/Desktop/mine/zach-fn/node_modules/@babel/core/package.json) 中的脚本命令
+### 6. 更新 [package.json](package.json) 中的脚本命令
 
-确保脚本指向主配置文件 [webpack.config.js](file:///Users/zach/Desktop/mine/zach-fn/webpack/webpack.config.js)：
+确保脚本指向主配置文件 [webpack.config.js](../webpack/webpack.config.js)：
 
 ```json
 "scripts": {
@@ -273,5 +273,4 @@ module.exports = (env) => {
   "start": "webpack serve" // 启动开发服务器
 }
 ```
-
 通过以上配置，我们实现了 Webpack 配置的模块化拆分，使项目更易维护，并根据不同环境提供最佳构建策略。
