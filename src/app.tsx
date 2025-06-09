@@ -3,6 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import Register from "@/auth/register";
 import UserLayout from "@/auth/user-layout";
 import Login from "@/auth/login";
+import Layout from "#/layout";
+import Home from "@/home";
 
 const App: React.FC = () => {
   return (
@@ -10,6 +12,9 @@ const App: React.FC = () => {
       <Route element={<UserLayout />}>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+      </Route>
+      <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Home />} />
       </Route>
     </Routes>
   );

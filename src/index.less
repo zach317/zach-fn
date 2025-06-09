@@ -7,6 +7,54 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1 {
-  color: aqua;
+a {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.h1-title {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 14px;
+  color: #333;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px solid #eaeaea;
+  padding-bottom: 8px;
+}
+
+.user-button {
+  width: 100%;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  &:hover {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.link-text {
+  color: #666;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.link-a {
+  margin-left: 4px;
+  color: #1890ff;
+  font-weight: bold;
 }

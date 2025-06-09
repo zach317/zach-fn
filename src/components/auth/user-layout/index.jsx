@@ -1,12 +1,23 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, Outlet } from "react-router-dom";
+import { Spin } from "antd";
+import Logo from "images/logo.png";
+import "./index.less";
 
 const UserLayout = () => {
+  const [loading, setLoading] = useState(false);
+
   return (
-    <div>
-      用户页面
-      <Outlet />
-    </div>
+    <Spin spinning={loading}>
+      <div className="zach-user-layout">
+        <Link className="zach-logo-link" to="/">
+          <img src={Logo} alt="logo" className="zach-logo" />
+        </Link>
+        <div className="zach-login-container">
+          <Outlet context={{ setLoading }} />
+        </div>
+      </div>
+    </Spin>
   );
 };
 export default UserLayout;

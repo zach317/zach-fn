@@ -1,0 +1,31 @@
+.zach-user-layout {
+  height: 100vh;
+  padding: 12px;
+  display: flex;
+  box-sizing: border-box;
+
+  .zach-logo-link {
+    .zach-logo {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  .zach-login-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+      // 轻柔外阴影
+      0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 24px;
+    transition: box-shadow 0.3s ease;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 500px;
+
+    &:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
