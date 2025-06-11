@@ -1,0 +1,68 @@
+.header-dropdown {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 999px;
+  transition: background-color 0.3s ease;
+  .header-user-icon {
+    margin-right: 5px;
+    font-size: 20px;
+    transition: transform 0.3s ease;
+  }
+  &:hover {
+    color: #ffdd57;
+    background-color: rgba(255, 255, 255, 0.1);
+    .header-user-icon {
+      color: #ffdd57;
+    }
+  }
+}
+
+.link-to-login {
+  text-decoration: none;
+  font-weight: bold;
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+  color: #eee;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffdd57;
+    border-color: #ffdd57;
+  }
+}
+
+.dropdown-item {
+  display: block;
+  padding: 10px 16px;
+  color: #333 !important;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+
+  &:hover,
+  &:focus {
+    background-color: @primary-color;
+    color: white !important;
+    transform: translateX(4px);
+  }
+}
+
+.dropdown-logout {
+  color: #ff4d4f !important; // 红色系，表示警告操作
+  font-weight: bold;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #ff4d4f;
+    color: white !important;
+    transform: translateX(6px) scale(1.02); // 更加明显的悬停效果
+    box-shadow: 0 2px 6px rgba(255, 0, 0, 0.3);
+  }
+}

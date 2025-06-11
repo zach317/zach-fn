@@ -14,7 +14,8 @@
       "#/*": ["src/common/*"],
       "images/*": ["src/images/*"],
       "utils/*": ["src/utils/*"],
+      "hooks/*": ["src/hooks/*"]
     }
   },
-  "exclude": ["node_modules", "webpack", "**/*.js"]
+  "exclude": ["node_modules", "webpack", "dist", "eslint.config.mjs"]
 }
