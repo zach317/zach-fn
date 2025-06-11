@@ -26,7 +26,7 @@ const Login = () => {
           return;
         }
         message.warning(res.message);
-      } catch (error) {
+      } catch {
         setLoading(false);
       }
     });

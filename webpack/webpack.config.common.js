@@ -58,6 +58,7 @@ module.exports = {
       images: pathResolve("../src/images"),
       utils: pathResolve("../src/utils"),
       hooks: pathResolve("../src/hooks"),
+      styles: pathResolve("../src/styles"),
     },
   },
 };

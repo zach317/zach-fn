@@ -5,7 +5,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { HappyProvider } from "@ant-design/happy-work-theme";
 // 由于 antd 组件的默认文案是英文，所以需要修改为中文
 import dayjs from "dayjs";
-import theme from "./theme";
 import { ConfigProvider } from "antd";
 import zhCN from "antd/locale/zh_CN";
 import "dayjs/locale/zh-cn";
@@ -14,7 +13,7 @@ import "./index.less";
 dayjs.locale("zh-cn");
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ConfigProvider theme={theme} locale={zhCN}>
+  <ConfigProvider locale={zhCN}>
     <Router
       /**
        * 配置 React Router 的 future 选项，启用实验性功能：

@@ -22,40 +22,291 @@ a {
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
-  border-bottom: 2px solid #eaeaea;
   padding-bottom: 8px;
 }
 
-.user-button {
-  width: 100%;
-  padding: 12px 24px;
-  font-size: 16px;
-  font-weight: 500;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+.btn-group {
   display: flex;
+  gap: 16px;
   justify-content: center;
-  align-items: center;
-  
-  &:hover {
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid fade(@text-color-light, 20%);
+  animation: fadeInUp 0.6s ease-out 0.3s both;
 }
-
+// 链接文本样式
 .link-text {
-  color: #666;
+  text-align: center;
+  color: @text-color-secondary;
   font-size: 14px;
-  margin-top: 8px;
 }
 
 .link-a {
-  margin-left: 4px;
-  color: #1890ff;
-  font-weight: bold;
+  color: @primary-color;
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  transition: @transition-base;
+  margin-left: 3px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, @primary-color, @info-color);
+    transition: @transition-base;
+  }
+
+  &:hover {
+    color: darken(@primary-color, 10%);
+
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+// ========================================
+// Ant Design 公共主题样式库
+// =======================================
+// 按钮样式
+// 主按钮样式
+button {
+  &.ant-btn-color-primary {
+    background: linear-gradient(
+      135deg,
+      @primary-color 0%,
+      darken(@primary-color, 5%) 100%
+    );
+    border: none;
+    box-shadow: @box-shadow-light;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+      );
+      transition: @transition-base;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: @box-shadow-medium;
+      background: linear-gradient(
+        135deg,
+        @primary-color-hover 0%,
+        darken(@primary-color-hover, 5%) 100%
+      );
+
+      &::before {
+        left: 100%;
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // 次要按钮样式
+  &:not(.ant-btn-primary) {
+    background: @background-color-light;
+    border: 2px solid fade(@text-color-light, 30%);
+    color: @text-color;
+
+    &:hover {
+      border-color: @primary-color;
+      color: @primary-color;
+      transform: translateY(-2px);
+      box-shadow: @box-shadow-light;
+    }
+  }
+}
+//  表单样式
+.ant-form {
+  .ant-form-item-row {
+    align-items: center;
+  }
+  .ant-form-item {
+    margin-bottom: 24px;
+    transition: @transition-base;
+
+    &:hover {
+      transform: translateX(4px);
+    }
+  }
+
+  .ant-form-item-label {
+    > label {
+      font-weight: 600;
+      color: @text-color;
+
+      &::after {
+        display: none; // 隐藏默认冒号
+      }
+    }
+  }
+
+  .ant-input {
+    border-radius: @border-radius-base;
+    border: 2px solid fade(@primary-color, 30%);
+    transition: @transition-base;
+    font-size: 15px;
+    height: 40px;
+    padding: 4px 11px;
+
+    &:focus,
+    &:hover {
+      border-color: @primary-color;
+      box-shadow: 0 0 0 4px fade(@primary-color, 15%);
+    }
+
+    &:focus {
+      background: @background-color-light;
+      box-shadow: 0 0 0 4px fade(@primary-color, 20%);
+    }
+  }
+
+  .ant-select {
+    .ant-select-selector {
+      border-radius: @border-radius-base !important;
+      border: 2px solid fade(@primary-color, 30%) !important;
+      transition: @transition-base !important;
+      padding: 4px 11px !important;
+      font-size: 15px !important;
+      height: 40px;
+
+      .ant-select-selection-search-input {
+        height: 32px !important;
+      }
+
+      .ant-select-selection-item {
+        line-height: 32px !important;
+        font-size: 15px !important;
+      }
+    }
+
+    &:hover .ant-select-selector {
+      border-color: @primary-color !important;
+      background-color: @background-color-light !important;
+      box-shadow: 0 0 0 4px fade(@primary-color, 15%) !important;
+    }
+
+    &.ant-select-focused .ant-select-selector {
+      border-color: @primary-color !important;
+      background-color: @background-color-light !important;
+      box-shadow: 0 0 0 4px fade(@primary-color, 15%) !important;
+    }
+
+    &.ant-select-open .ant-select-selector {
+      border-color: @primary-color !important;
+      background-color: @background-color-light !important;
+      box-shadow: 0 0 0 4px fade(@primary-color, 15%) !important;
+    }
+
+    // 编辑状态样式
+    &.edit .ant-select-selector {
+      border-color: @primary-color !important;
+      background-color: fade(@primary-color-light, 30%) !important;
+
+      &:focus {
+        background-color: @background-color-light !important;
+        box-shadow: 0 0 0 4px fade(@primary-color, 20%) !important;
+      }
+    }
+  }
+
+  .ant-picker {
+    width: 100%;
+    border-radius: @border-radius-base;
+    border: 2px solid fade(@primary-color, 30%);
+    transition: @transition-base;
+    font-size: 15px;
+    padding: 4px 11px;
+    height: 40px;
+
+    .ant-picker-input > input {
+      font-size: 15px;
+      background-color: transparent;
+    }
+
+    &:hover {
+      border-color: @primary-color;
+      background-color: @background-color-light;
+      box-shadow: 0 0 0 4px fade(@primary-color, 15%);
+    }
+
+    &.ant-picker-focused {
+      border-color: @primary-color;
+      background-color: @background-color-light;
+      box-shadow: 0 0 0 4px fade(@primary-color, 15%);
+    }
+
+    // 编辑状态样式
+    &.edit {
+      border-color: @primary-color;
+      background-color: fade(@primary-color-light, 30%);
+
+      &:focus {
+        background-color: @background-color-light;
+        box-shadow: 0 0 0 4px fade(@primary-color, 20%);
+      }
+    }
+  }
+
+  .ant-input-password {
+    height: 40px;
+    border: 2px solid fade(@primary-color, 30%);
+    padding: 4px 11px;
+    .ant-input {
+      border: none;
+      box-shadow: none;
+      height: auto;
+      padding: 0;
+
+      &:hover,
+      &:focus {
+        border: none;
+        box-shadow: none;
+      }
+    }
+
+    .ant-input-suffix {
+      color: @text-color-secondary;
+
+      .anticon {
+        transition: @transition-base;
+
+        &:hover {
+          color: @primary-color;
+        }
+      }
+    }
+  }
+}
+
+// 表单验证错误样式增强
+.ant-form-item-has-error {
+  .ant-input,
+  .ant-select-selector,
+  .ant-picker {
+    border-color: @danger-color !important;
+    animation: shake 0.5s ease-in-out;
+  }
+}
+
+// 成功状态动画
+.success-feedback {
+  animation: pulse 0.6s ease-in-out;
 }

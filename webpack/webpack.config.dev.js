@@ -23,7 +23,7 @@ module.exports = {
             options: {
               additionalData: `@import "${path.resolve(
                 __dirname,
-                "../src/variables.less"
+                "../src/styles/variables.less"
               )}";`,
             },
           },

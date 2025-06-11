@@ -24,7 +24,7 @@ const HeaderDropdown = ({ user }) => {
     {
       key: "user-profile",
       label: (
-        <Link className="dropdown-item" to="/">
+        <Link className="dropdown-item" to="/user-profile">
           个人中心
         </Link>
       ),

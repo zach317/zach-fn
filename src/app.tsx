@@ -5,6 +5,7 @@ import UserLayout from "@/auth/user-layout";
 import Login from "@/auth/login";
 import Layout from "#/layout";
 import Home from "@/home";
+import UserProfile from "@/user-profile";
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
       </Route>
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/user-profile" element={<UserProfile />} />
       </Route>
     </Routes>
   );

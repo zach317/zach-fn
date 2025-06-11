@@ -56,7 +56,7 @@ const Register = () => {
     try {
       const res = await checkUsername({ username });
       return res;
-    } catch (error) {
+    } catch {
       return false;
     }
   };

@@ -1,0 +1,233 @@
+.user-profile-wrap {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  min-height: calc(100vh - 120px);
+  background: linear-gradient(
+    135deg,
+    @background-color 0%,
+    darken(@background-color, 3%) 100%
+  );
+}
+
+.user-profile-item {
+  background: @background-color-light;
+  border-radius: @border-radius-lg;
+  box-shadow: @box-shadow-light;
+  transition: @transition-base;
+  position: relative;
+  overflow: hidden;
+
+  // 鼠标悬停效果
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: @box-shadow-medium;
+  }
+
+  // 光效装饰
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      @primary-color,
+      transparent
+    );
+    animation: shimmer 3s infinite;
+  }
+}
+
+// 左侧统计区域
+.user-profile-left {
+  flex: 1;
+  min-width: 320px;
+  padding: 32px 24px;
+}
+
+.user-category-wrap {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+  background: linear-gradient(
+    135deg,
+    @primary-color-light 0%,
+    lighten(@primary-color-light, 3%) 100%
+  );
+  border-radius: @border-radius-base;
+  border: 1px solid fade(@primary-color, 20%);
+  transition: @transition-base;
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: @box-shadow-medium;
+    border-color: fade(@primary-color, 40%);
+
+    .category-value {
+      color: @primary-color;
+    }
+  }
+
+  // 统计项动画入场
+  &:nth-child(1) {
+    animation: slideInUp 0.6s ease-out 0.1s both;
+  }
+  &:nth-child(2) {
+    animation: slideInUp 0.6s ease-out 0.2s both;
+  }
+  &:nth-child(3) {
+    animation: slideInUp 0.6s ease-out 0.3s both;
+  }
+  &:nth-child(4) {
+    animation: slideInUp 0.6s ease-out 0.4s both;
+  }
+}
+
+.category-label {
+  font-size: 14px;
+  color: @text-color-secondary;
+  margin-bottom: 8px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.category-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: @text-color;
+  transition: @transition-base;
+  position: relative;
+
+  // 数字滚动效果
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, @primary-color, @info-color);
+    transition: @transition-base;
+  }
+
+  .category-item:hover &::after {
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+
+// 右侧表单区域
+.user-profile-right {
+  flex: 2;
+  min-width: 480px;
+  padding: 32px;
+}
+
+// 显示模式样式
+.show-wrap {
+  margin-bottom: 32px;
+}
+
+.show-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid fade(@text-color-light, 30%);
+  transition: @transition-base;
+  position: relative;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: fade(@primary-color-light, 50%);
+    border-radius: @border-radius-sm;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+.show-label {
+  flex: 0 0 80px;
+  font-weight: 600;
+  color: @text-color-secondary;
+  font-size: 14px;
+}
+
+.show-value {
+  flex: 1;
+  color: @text-color;
+  font-size: 15px;
+  padding-left: 16px;
+}
+
+.btn {
+  min-width: 120px;
+  height: 44px;
+  border-radius: @border-radius-base;
+  font-weight: 600;
+  font-size: 15px;
+  transition: @transition-base;
+  position: relative;
+  overflow: hidden;
+}
+
+// 加载动画
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: fade(@background-color-light, 90%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: @border-radius-lg;
+  z-index: 10;
+
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid fade(@primary-color, 30%);
+    border-top: 3px solid @primary-color;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+// 加载状态样式
+.ant-spin-nested-loading {
+  .ant-spin-container {
+    transition: @transition-slow;
+  }
+  
+  &.ant-spin-spinning .ant-spin-container {
+    opacity: 0.7;
+    filter: blur(1px);
+  }
+}
+
+.ant-spin {
+  .ant-spin-dot {
+    font-size: 24px;
+    
+    .ant-spin-dot-item {
+      background-color: @primary-color;
+    }
+  }
+}
