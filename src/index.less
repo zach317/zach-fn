@@ -83,6 +83,7 @@ button {
     );
     border: none;
     box-shadow: @box-shadow-light;
+    overflow: hidden;
 
     &::before {
       content: "";
@@ -309,4 +310,234 @@ button {
 // 成功状态动画
 .success-feedback {
   animation: pulse 0.6s ease-in-out;
+}
+
+// 下拉菜单容器
+.ant-dropdown {
+  .ant-dropdown-menu {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border-radius: @border-radius-lg;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px;
+    overflow: hidden;
+    position: relative;
+
+    // 菜单顶部微妙光效
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(14, 176, 201, 0.3),
+        transparent
+      );
+    }
+
+    .ant-dropdown-menu-item {
+      border-radius: @border-radius-base;
+      margin: 2px 0;
+      padding: 0;
+      transition: @transition-base;
+      overflow: hidden;
+      position: relative;
+
+      // 菜单项内容
+      .dropdown-item {
+        display: flex;
+        align-items: center;
+        padding: 14px 18px;
+        color: @text-color !important;
+        font-weight: 500;
+        font-size: 14px;
+        text-decoration: none;
+        transition: @transition-base;
+        position: relative;
+        border-radius: @border-radius-base;
+        letter-spacing: 0.3px;
+
+        // 图标（如果有）
+        .anticon {
+          margin-right: 10px;
+          font-size: 16px;
+          transition: @transition-base;
+        }
+
+        // 悬停前的微妙背景
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(
+            135deg,
+            @primary-color-light,
+            fade(@primary-color, 10%)
+          );
+          opacity: 0;
+          transition: @transition-base;
+          border-radius: @border-radius-base;
+        }
+
+        &:hover,
+        &:focus {
+          color: white !important;
+          background: linear-gradient(
+            135deg,
+            @primary-color 0%,
+            darken(@primary-color, 5%) 100%
+          );
+          transform: translateX(6px) scale(1.02);
+          box-shadow: 0 4px 12px rgba(14, 176, 201, 0.3);
+
+          &::before {
+            opacity: 1;
+          }
+
+          .anticon {
+            transform: scale(1.1);
+            color: white;
+          }
+        }
+
+        &:active {
+          transform: translateX(4px) scale(1);
+        }
+      }
+
+      // 退出登录特殊样式
+      .dropdown-logout {
+        color: @danger-color !important;
+        font-weight: 600;
+        position: relative;
+
+        &::before {
+          background: linear-gradient(
+            135deg,
+            fade(@danger-color, 10%),
+            fade(@danger-color, 5%)
+          );
+        }
+
+        &:hover {
+          background: linear-gradient(
+            135deg,
+            @danger-color 0%,
+            darken(@danger-color, 5%) 100%
+          ) !important;
+          color: white !important;
+          transform: translateX(8px) scale(1.03);
+          box-shadow: 0 6px 16px rgba(220, 53, 69, 0.4);
+
+          .anticon {
+            color: white;
+            animation: shake 0.5s ease-in-out;
+          }
+        }
+      }
+
+      // 活跃状态
+      &.ant-dropdown-menu-item-active,
+      &:hover {
+        background: transparent;
+      }
+    }
+
+    // 菜单分隔线增强
+    .ant-dropdown-menu-item-divider {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        fade(@text-color-light, 30%),
+        transparent
+      );
+      margin: 8px 12px;
+      height: 1px;
+    }
+  }
+}
+
+// Modal 确认对话框样式增强
+.ant-modal {
+  .ant-modal-content {
+    border-radius: @border-radius-lg;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    .ant-modal-header {
+      background: linear-gradient(
+        135deg,
+        @background-color-light 0%,
+        fade(@primary-color-light, 30%) 100%
+      );
+      border-bottom: 1px solid fade(@primary-color, 15%);
+      padding: 20px 24px;
+
+      .ant-modal-title {
+        font-weight: 600;
+        color: @text-color;
+        font-size: 16px;
+      }
+    }
+
+    .ant-modal-body {
+      padding: 24px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: @text-color;
+    }
+
+    .ant-modal-footer {
+      padding: 16px 24px 24px;
+      border-top: none;
+
+      .ant-btn {
+        height: 40px;
+        border-radius: @border-radius-base;
+        font-weight: 600;
+        transition: @transition-base;
+
+        &.ant-btn-primary {
+          background: linear-gradient(
+            135deg,
+            @danger-color 0%,
+            darken(@danger-color, 5%) 100%
+          );
+          border: none;
+
+          &:hover {
+            background: linear-gradient(
+              135deg,
+              lighten(@danger-color, 5%) 0%,
+              @danger-color 100%
+            );
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+          }
+        }
+
+        &:not(.ant-btn-primary) {
+          &:hover {
+            transform: translateY(-1px);
+            box-shadow: @box-shadow-light;
+          }
+        }
+      }
+    }
+  }
+
+  .ant-modal-mask {
+    backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.6);
+  }
 }
