@@ -30,14 +30,6 @@ const HeaderDropdown = ({ user }) => {
       ),
     },
     {
-      key: "system",
-      label: (
-        <Link className="dropdown-item" to="/">
-          交易设置
-        </Link>
-      ),
-    },
-    {
       key: "logout",
       label: (
         <a className="dropdown-item dropdown-logout" onClick={handleLogout}>

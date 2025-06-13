@@ -6,6 +6,9 @@ import Login from "@/auth/login";
 import Layout from "#/layout";
 import Home from "@/home";
 import UserProfile from "@/user-profile";
+import AppSettingLayout from "@/app-setting/layout";
+import AppSetting from "@/app-setting";
+import Categorie from "@/app-setting/categorie";
 
 const App: React.FC = () => {
   return (
@@ -17,6 +20,10 @@ const App: React.FC = () => {
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/user-profile" element={<UserProfile />} />
+        <Route path="/setting" element={<AppSettingLayout />}>
+          <Route path="/setting" element={<AppSetting />} />
+          <Route path="/setting/categorie" element={<Categorie />} />
+        </Route>
       </Route>
     </Routes>
   );
