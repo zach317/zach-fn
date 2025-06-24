@@ -209,16 +209,25 @@ const useCategoryManagement = () => {
         const dragKey = dragNode.key;
         const dropKey = node.key;
 
+        // 添加子节点深度检查
+        const getMaxDepth = (nodeData, currentDepth = 0) => {
+          if (!nodeData.children || nodeData.children.length === 0) {
+            return currentDepth;
+          }
+          return Math.max(
+            ...nodeData.children.map((child) =>
+              getMaxDepth(child, currentDepth + 1)
+            )
+          );
+        };
+        const dragNodeMaxDepth = getMaxDepth(dragNode);
+
         // 计算新的层级
-        let newLevel;
-        if (dropToGap) {
-          // 移动到同级
-          newLevel = node.level || 1;
-        } else {
-          // 移动到子级
-          newLevel = (node.level || 1) + 1;
-          if (newLevel > 3) {
-            message.warning("分类层级不能超过3层");
+        if (!dropToGap) {
+          // 移动到子级时检查
+          const targetLevel = (node.level || 1) + 1;
+          if (targetLevel + dragNodeMaxDepth > 3) {
+            message.warning("移动会导致子分类层级超过3层限制");
             return;
           }
         }
