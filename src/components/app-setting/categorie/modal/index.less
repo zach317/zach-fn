@@ -1,0 +1,83 @@
+.category-modal {
+  .ant-modal-content {
+    border-radius: @border-radius-lg;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+
+    .ant-modal-header {
+      background: linear-gradient(
+        135deg,
+        @background-color-light 0%,
+        fade(@primary-color-light, 30%) 100%
+      );
+      border-bottom: 1px solid fade(@primary-color, 15%);
+      padding: 24px 32px;
+
+      .ant-modal-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: @text-color;
+      }
+    }
+
+    .ant-modal-body {
+      padding: 32px;
+
+      .ant-form-item {
+        margin-bottom: 24px;
+
+        .ant-form-item-label {
+          > label {
+            font-size: 16px;
+            font-weight: 600;
+            color: @text-color;
+          }
+        }
+
+        .ant-input {
+          height: 44px;
+          font-size: 15px;
+
+          &:focus {
+            box-shadow: 0 0 0 4px fade(@primary-color, 20%);
+          }
+        }
+      }
+
+      .level-info {
+        background: fade(@primary-color-light, 40%);
+        padding: 12px 16px;
+        border-radius: @border-radius-base;
+        border-left: 4px solid @primary-color;
+        margin-top: 16px;
+
+        span {
+          color: @primary-color;
+          font-weight: 600;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .ant-modal-footer {
+      padding: 20px 32px 32px;
+      border-top: none;
+
+      .ant-btn {
+        height: 44px;
+        padding: 0 24px;
+        border-radius: @border-radius-base;
+        font-weight: 600;
+        font-size: 15px;
+        transition: @transition-base;
+
+        &:not(.ant-btn-primary) {
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: @box-shadow-light;
+          }
+        }
+      }
+    }
+  }
+}

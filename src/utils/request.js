@@ -11,7 +11,6 @@ request.interceptors.request.use(
   // 在发送请求之前做些什么
   (config) => {
     const token = localStorage.getItem("token");
-    // eslint-disable-next-line no-param-reassign
     config.headers.Authorization = `Bearer ${token}`;
     return config;
   },

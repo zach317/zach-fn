@@ -1,0 +1,192 @@
+.tree-node-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: @background-color-light;
+  border: 1px solid fade(@primary-color, 15%);
+  border-radius: @border-radius-base;
+  transition: @transition-base;
+  position: relative;
+  overflow: hidden;
+
+  // 节点信息区域
+  .node-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+
+    .drag-handle {
+      color: @text-color-secondary;
+      font-size: 14px;
+      opacity: 0;
+      transition: @transition-base;
+      cursor: grab;
+
+      &:active {
+        cursor: grabbing;
+      }
+    }
+
+    .node-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: @text-color;
+      transition: @transition-base;
+
+      // 不同层级的样式
+      &.level-1 {
+        font-size: 16px;
+        color: @primary-color;
+        font-weight: 700;
+      }
+
+      &.level-2 {
+        font-size: 15px;
+        color: @text-color;
+        font-weight: 600;
+      }
+
+      &.level-3 {
+        font-size: 14px;
+        color: @text-color-secondary;
+        font-weight: 500;
+      }
+    }
+
+    .node-level {
+      background: linear-gradient(135deg, @primary-color, @info-color);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // 节点操作区域
+  .node-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: @transition-base;
+
+    .action-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      transition: @transition-base;
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        transition: @transition-base;
+      }
+
+      &:hover::before {
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .anticon {
+        font-size: 14px;
+        z-index: 1;
+      }
+
+      // 添加按钮样式
+      &.add-btn {
+        color: @success-color;
+
+        &::before {
+          background: fade(@success-color, 15%);
+        }
+
+        &:hover {
+          color: white;
+          background: @success-color;
+          transform: scale(1.1);
+        }
+      }
+
+      // 编辑按钮样式
+      &.edit-btn {
+        color: @primary-color;
+
+        &::before {
+          background: fade(@primary-color, 15%);
+        }
+
+        &:hover {
+          color: white;
+          background: @primary-color;
+          transform: scale(1.1);
+        }
+      }
+
+      // 删除按钮样式
+      &.delete-btn {
+        color: @danger-color;
+
+        &::before {
+          background: fade(@danger-color, 15%);
+        }
+
+        &:hover {
+          color: white;
+          background: @danger-color;
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+
+  &:hover {
+    border-color: fade(@primary-color, 30%);
+    box-shadow: @box-shadow-light;
+    transform: translateY(-2px);
+
+    .node-actions {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  // 节点层级装饰线
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(
+      180deg,
+      @primary-color,
+      fade(@primary-color, 30%)
+    );
+    border-radius: 0 2px 2px 0;
+    opacity: 0;
+    transition: @transition-base;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
