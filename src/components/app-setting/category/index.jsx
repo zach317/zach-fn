@@ -12,7 +12,7 @@ import "./index.less";
 
 const { TabPane } = Tabs;
 
-const Categorie = () => {
+const category = () => {
   const {
     data,
     activeTab,
@@ -141,4 +141,4 @@ const Categorie = () => {
   );
 };
 
-export default Categorie;
+export default category;

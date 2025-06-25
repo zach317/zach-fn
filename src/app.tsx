@@ -9,6 +9,7 @@ import UserProfile from "@/user-profile";
 import AppSettingLayout from "@/app-setting/layout";
 import AppSetting from "@/app-setting";
 import Category from "@/app-setting/category";
+import Tag from "@/app-setting/tag";
 
 const App: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const App: React.FC = () => {
         <Route path="/setting" element={<AppSettingLayout />}>
           <Route path="/setting" element={<AppSetting />} />
           <Route path="/setting/category" element={<Category />} />
+          <Route path="/setting/tag" element={<Tag />} />
         </Route>
       </Route>
     </Routes>

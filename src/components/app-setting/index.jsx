@@ -11,7 +11,7 @@ const AppSetting = () => {
   return (
     <div className="app-setting-container">
       <div className="setting-grid">
-        <Link to="/setting/categorie" className="setting-card">
+        <Link to="/setting/category" className="setting-card">
           <div className="setting-icon">
             <ApartmentOutlined />
           </div>
@@ -23,7 +23,7 @@ const AppSetting = () => {
             <span>→</span>
           </div>
         </Link>
-        <Link to="#" className="setting-card">
+        <Link to="/setting/tag" className="setting-card">
           <div className="setting-icon">
             <TagsOutlined />
           </div>
