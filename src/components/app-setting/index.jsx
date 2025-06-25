@@ -1,7 +1,11 @@
 import React from "react";
 import "./index.less";
 import { Link } from "react-router-dom";
-import { SettingOutlined, TagsOutlined } from "@ant-design/icons";
+import {
+  SettingOutlined,
+  ApartmentOutlined,
+  TagsOutlined,
+} from "@ant-design/icons";
 
 const AppSetting = () => {
   return (
@@ -9,7 +13,7 @@ const AppSetting = () => {
       <div className="setting-grid">
         <Link to="/setting/categorie" className="setting-card">
           <div className="setting-icon">
-            <TagsOutlined />
+            <ApartmentOutlined />
           </div>
           <div className="setting-content">
             <h3>分类设置</h3>

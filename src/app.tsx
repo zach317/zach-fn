@@ -8,7 +8,7 @@ import Home from "@/home";
 import UserProfile from "@/user-profile";
 import AppSettingLayout from "@/app-setting/layout";
 import AppSetting from "@/app-setting";
-import Categorie from "@/app-setting/categorie";
+import Category from "@/app-setting/category";
 
 const App: React.FC = () => {
   return (
@@ -22,7 +22,7 @@ const App: React.FC = () => {
         <Route path="/user-profile" element={<UserProfile />} />
         <Route path="/setting" element={<AppSettingLayout />}>
           <Route path="/setting" element={<AppSetting />} />
-          <Route path="/setting/categorie" element={<Categorie />} />
+          <Route path="/setting/category" element={<Category />} />
         </Route>
       </Route>
     </Routes>

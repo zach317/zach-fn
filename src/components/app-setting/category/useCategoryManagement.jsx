@@ -6,7 +6,7 @@ import {
   updateCategory,
   deleteCategory,
   reorderCategory,
-} from "@/app-setting/categorie/services";
+} from "@/app-setting/category/services";
 
 const useCategoryManagement = () => {
   const [form] = Form.useForm();

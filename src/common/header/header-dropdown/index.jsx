@@ -1,8 +1,7 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import { Dropdown, Space, Modal, message } from "antd";
 import { useNavigate, Link } from "react-router-dom";
-import Icon from "#/my-icon";
+import { UserOutlined } from "@ant-design/icons";
 import "./index.less";
 
 const HeaderDropdown = ({ user }) => {
@@ -42,7 +41,7 @@ const HeaderDropdown = ({ user }) => {
   return id ? (
     <Dropdown className="header-dropdown" menu={{ items }}>
       <Space>
-        <Icon className="header-user-icon" type="icon-yonghu" />
+        <UserOutlined className="header-user-icon" />
         <span className="header-user-nickname">{nickname}</span>
       </Space>
     </Dropdown>
