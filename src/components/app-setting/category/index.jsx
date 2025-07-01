@@ -1,18 +1,15 @@
 import React, { useCallback } from "react";
-import { Tree, Button, Tabs } from "antd";
-import {
-  PlusOutlined,
-  MoneyCollectOutlined,
-  ShoppingOutlined,
-} from "@ant-design/icons";
+import { Tree, Tabs } from "antd";
+import { MoneyCollectOutlined, ShoppingOutlined } from "@ant-design/icons";
 import useCategoryManagement from "./useCategoryManagement";
 import CategoryModal from "./modal";
 import TreeNode from "./tree-node";
+import SettingHeader from "#/setting-header";
 import "./index.less";
 
 const { TabPane } = Tabs;
 
-const category = () => {
+const Category = () => {
   const {
     data,
     activeTab,
@@ -32,31 +29,23 @@ const category = () => {
   } = useCategoryManagement();
 
   // 树节点标题渲染
-  const renderTreeNode = useCallback((nodeData) => {
-    return (
-      <TreeNode
-        nodeData={nodeData}
-        onAdd={handleAdd}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-      />
-    );
-  }, [handleAdd, handleDelete, handleEdit]);
+  const renderTreeNode = useCallback(
+    (nodeData) => {
+      return (
+        <TreeNode
+          nodeData={nodeData}
+          onAdd={handleAdd}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
+      );
+    },
+    [handleAdd, handleDelete, handleEdit]
+  );
 
   return (
     <div className="category-management">
-      <div className="category-header">
-        <h2 className="page-title">分类管理</h2>
-        <Button
-          type="primary"
-          icon={<PlusOutlined />}
-          onClick={() => handleAdd()}
-          className="add-category-btn"
-        >
-          添加一级分类
-        </Button>
-      </div>
-
+      <SettingHeader title="分类" handleAdd={handleAdd} />
       <Tabs
         activeKey={activeTab}
         onChange={handleTabChange}
@@ -141,4 +130,4 @@ const category = () => {
   );
 };
 
-export default category;
+export default Category;

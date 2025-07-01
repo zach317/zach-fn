@@ -69,6 +69,25 @@ a {
   }
 }
 
+.light-line {
+  // 光效装饰
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      @primary-color,
+      transparent
+    );
+    animation: shimmer 3s infinite;
+  }
+}
+
 // ========================================
 // Ant Design 公共主题样式库
 // =======================================

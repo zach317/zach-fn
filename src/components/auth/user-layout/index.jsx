@@ -13,7 +13,7 @@ const UserLayout = () => {
         <Link className="zach-logo-link" to="/">
           <img src={Logo} alt="logo" className="zach-logo" />
         </Link>
-        <div className="zach-login-container">
+        <div className="zach-login-container light-line">
           <Outlet context={{ setLoading }} />
         </div>
       </div>

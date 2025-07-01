@@ -11,7 +11,7 @@ const AppSetting = () => {
   return (
     <div className="app-setting-container">
       <div className="setting-grid">
-        <Link to="/setting/category" className="setting-card">
+        <Link to="/setting/category" className="setting-card light-line">
           <div className="setting-icon">
             <ApartmentOutlined />
           </div>
@@ -23,7 +23,7 @@ const AppSetting = () => {
             <span>→</span>
           </div>
         </Link>
-        <Link to="/setting/tag" className="setting-card">
+        <Link to="/setting/tag" className="setting-card light-line">
           <div className="setting-icon">
             <TagsOutlined />
           </div>
@@ -36,7 +36,7 @@ const AppSetting = () => {
           </div>
         </Link>
 
-        <Link to="#" className="setting-card">
+        <Link to="#" className="setting-card light-line">
           <div className="setting-icon">
             <TagsOutlined />
           </div>
@@ -49,7 +49,7 @@ const AppSetting = () => {
           </div>
         </Link>
 
-        <Link to="#" className="setting-card">
+        <Link to="#" className="setting-card light-line">
           <div className="setting-icon">
             <TagsOutlined />
           </div>
@@ -61,7 +61,7 @@ const AppSetting = () => {
             <span>→</span>
           </div>
         </Link>
-        <Link to="#" className="setting-card">
+        <Link to="#" className="setting-card light-line">
           <div className="setting-icon">
             <TagsOutlined />
           </div>
@@ -75,7 +75,7 @@ const AppSetting = () => {
         </Link>
 
         {/* 预留其他设置项 */}
-        <div className="setting-card disabled">
+        <div className="setting-card light-line disabled">
           <div className="setting-icon">
             <SettingOutlined />
           </div>

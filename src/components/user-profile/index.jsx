@@ -170,7 +170,7 @@ const UserProfile = () => {
 
   return (
     <div className="user-profile-wrap">
-      <div className="user-profile-left user-profile-item">
+      <div className="user-profile-left user-profile-item light-line">
         <div className="user-category-wrap">
           <div className="category-item">
             <span className="category-label">交易数量</span>
@@ -190,7 +190,7 @@ const UserProfile = () => {
           </div>
         </div>
       </div>
-      <div className="user-profile-right user-profile-item">
+      <div className="user-profile-right user-profile-item light-line">
         {isEdit ? FormEl : ShowEl}
         <div className="btn-group">
           <Button
