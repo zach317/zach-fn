@@ -1,0 +1,237 @@
+// 标签卡片
+.tag-card {
+  background: @background-color-light;
+  border-radius: @border-radius-lg;
+  box-shadow: @box-shadow-light;
+  border: 1px solid fade(@primary-color, 10%);
+  overflow: hidden;
+  transition: @transition-base;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: @box-shadow-medium;
+    border-color: fade(@primary-color, 25%);
+  }
+
+  // 卡片头部
+  .tag-card-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid fade(@primary-color, 8%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(
+      135deg,
+      @background-color-light 0%,
+      fade(@primary-color-light, 20%) 100%
+    );
+
+    .tag-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+
+      .tag-color {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border: 2px solid white;
+      }
+
+      .tag-name {
+        font-size: 18px;
+        font-weight: 600;
+        color: @text-color;
+      }
+
+      .tag-count {
+        color: @text-color-secondary;
+        font-size: 13px;
+        background: fade(@primary-color, 10%);
+        padding: 2px 8px;
+        border-radius: 12px;
+      }
+    }
+
+    .tag-actions {
+      display: flex;
+      gap: 4px;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: @transition-base;
+
+      .action-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: @transition-base;
+
+        &.add-btn {
+          color: @success-color;
+          &:hover {
+            background: @success-color;
+            color: white;
+            transform: scale(1.1);
+          }
+        }
+
+        &.edit-btn {
+          color: @primary-color;
+          &:hover {
+            background: @primary-color;
+            color: white;
+            transform: scale(1.1);
+          }
+        }
+
+        &.delete-btn {
+          color: @danger-color;
+          &:hover {
+            background: @danger-color;
+            color: white;
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+  }
+
+  &:hover .tag-card-header .tag-actions {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  // 卡片主体
+  .tag-card-body {
+    padding: 20px 24px 24px;
+    min-height: 120px;
+  }
+}
+
+.sub-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: @background-color;
+  border-radius: @border-radius-base;
+  border: 1px solid fade(@primary-color, 15%);
+  transition: @transition-base;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    background: fade(@primary-color-light, 30%);
+    border-color: fade(@primary-color, 30%);
+    transform: translateY(-2px);
+    box-shadow: @box-shadow-light;
+
+    .sub-tag-actions {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .sub-tag-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+  }
+
+  .sub-tag-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: @text-color;
+  }
+
+  .sub-tag-actions {
+    display: flex;
+    gap: 2px;
+    margin-left: 8px;
+    opacity: 0;
+    transform: translateX(5px);
+    transition: @transition-base;
+
+    .sub-action-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: @text-color-secondary;
+      font-size: 12px;
+      transition: @transition-base;
+
+      &:hover {
+        color: @primary-color;
+        background: fade(@primary-color, 15%);
+      }
+
+      &.delete:hover {
+        color: @danger-color;
+        background: fade(@danger-color, 15%);
+      }
+    }
+  }
+}
+
+// 子标签区域
+.sub-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+// 空子标签状态
+.empty-sub-tags {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  text-align: center;
+  background: linear-gradient(
+    135deg,
+    fade(@primary-color-light, 20%),
+    fade(@primary-color-light, 10%)
+  );
+  border: 2px dashed fade(@primary-color, 25%);
+  border-radius: @border-radius-base;
+  transition: @transition-base;
+
+  &:hover {
+    border-color: fade(@primary-color, 40%);
+    background: linear-gradient(
+      135deg,
+      fade(@primary-color-light, 30%),
+      fade(@primary-color-light, 15%)
+    );
+  }
+
+  .empty-icon {
+    font-size: 32px;
+    color: fade(@primary-color, 60%);
+    margin-bottom: 12px;
+  }
+
+  > span {
+    color: @text-color-secondary;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .add-sub-tag-btn {
+    font-size: 13px;
+    padding: 0;
+    height: auto;
+  }
+}
