@@ -1,3 +1,119 @@
 .app-setting-wrap {
   padding: 12px;
 }
+
+.breadcrumb-container {
+  background: @background-color-light;
+  padding: 16px 20px;
+  border-radius: @border-radius-base;
+  margin-bottom: 20px;
+  box-shadow: @box-shadow-light;
+  border: 1px solid fade(@primary-color, 10%);
+  position: relative;
+  overflow: hidden;
+
+  // 添加微妙的渐变背景
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      fade(@primary-color-light, 30%) 0%,
+      transparent 50%
+    );
+    pointer-events: none;
+  }
+
+  .ant-breadcrumb {
+    position: relative;
+    z-index: 1;
+
+    .ant-breadcrumb-separator {
+      color: @text-color-light;
+      font-size: 16px;
+      font-weight: 300;
+      margin: 0 12px;
+      transition: @transition-base;
+    }
+
+    .ant-breadcrumb-link {
+      .breadcrumb-home,
+      .breadcrumb-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: @text-color-secondary;
+        text-decoration: none;
+        padding: 6px 10px;
+        border-radius: @border-radius-sm;
+        transition: @transition-base;
+        font-size: 14px;
+        font-weight: 500;
+        position: relative;
+
+        .anticon {
+          font-size: 14px;
+          transition: @transition-base;
+        }
+
+        &:hover {
+          color: @primary-color;
+          background: fade(@primary-color, 8%);
+          transform: translateY(-1px);
+
+          .anticon {
+            transform: scale(1.1);
+            color: @primary-color;
+          }
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+
+      .breadcrumb-home {
+        color: @text-color;
+        font-weight: 600;
+
+        &:hover {
+          color: @primary-color;
+          background: fade(@primary-color, 10%);
+        }
+      }
+    }
+
+    .breadcrumb-current {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: @primary-color;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 6px 12px;
+      background: fade(@primary-color, 12%);
+      border-radius: @border-radius-sm;
+      border: 1px solid fade(@primary-color, 20%);
+      position: relative;
+
+      .anticon {
+        font-size: 14px;
+        color: @primary-color;
+      }
+    }
+  }
+
+  // 鼠标悬停整个容器时的效果
+  &:hover {
+    box-shadow: @box-shadow-medium;
+    border-color: fade(@primary-color, 20%);
+
+    .ant-breadcrumb-separator {
+      color: @primary-color;
+    }
+  }
+}
