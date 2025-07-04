@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { message, Form } from "antd";
 import { addTag, getTags, updateTag, deleteTag } from "./services";
+import crypto from "utils/crypto";
 
 const useTagManagement = () => {
   const [form] = Form.useForm();
@@ -8,14 +9,24 @@ const useTagManagement = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [tags, setTags] = useState([]);
 
+  const setLocalStorage = (data) => {
+    localStorage.setItem("tags", crypto.encrypt(JSON.stringify(data)));
+  };
+
   // 数据获取
   const fetchData = useCallback(async () => {
-    try {
-      const res = await getTags();
-      setTags(res.data || []);
-    } catch (error) {
-      message.error(error.message);
+    const tags = localStorage.getItem("tags");
+    if (!tags) {
+      try {
+        const res = await getTags();
+        setTags(res.data || []);
+        setLocalStorage(res.data);
+      } catch (error) {
+        message.error(error.message);
+      }
+      return;
     }
+    setTags(JSON.parse(crypto.decrypt(tags)) || []);
   }, []);
 
   // 初始化加载和tab切换时获取数据
@@ -48,6 +59,7 @@ const useTagManagement = () => {
       const res = await deleteTag({ tagId });
       if (res.success) {
         setTags(res.data);
+        setLocalStorage(res.data);
         message.success("删除成功");
       }
     },
@@ -91,6 +103,7 @@ const useTagManagement = () => {
         const res = await addTag(newTag);
         if (res.success) {
           setTags(res.data);
+          setLocalStorage(res.data);
           message.success("添加成功");
         }
       } else {
@@ -106,6 +119,7 @@ const useTagManagement = () => {
         if (res.success) {
           message.success("修改成功");
           setTags(res.data);
+          setLocalStorage(res.data);
         }
       }
 

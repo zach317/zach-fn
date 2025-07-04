@@ -7,6 +7,7 @@ import {
   deleteCategory,
   reorderCategory,
 } from "@/app-setting/category/services";
+import crypto from "utils/crypto";
 
 const useCategoryManagement = () => {
   const [form] = Form.useForm();
@@ -17,15 +18,43 @@ const useCategoryManagement = () => {
   const [autoExpandParent, setAutoExpandParent] = useState(true);
   const [data, setData] = useState([]);
 
+  const setLocalStorage = useCallback(
+    (data) => {
+      const prev = localStorage.getItem("categories");
+      if (prev) {
+        const prevData = JSON.parse(crypto.decrypt(prev));
+        const newData = { ...prevData, [activeTab]: data };
+        localStorage.setItem(
+          "categories",
+          crypto.encrypt(JSON.stringify(newData))
+        );
+        return;
+      }
+      localStorage.setItem(
+        "categories",
+        crypto.encrypt(JSON.stringify({ [activeTab]: data }))
+      );
+    },
+    [activeTab]
+  );
+
   // 数据获取
   const fetchData = useCallback(async () => {
-    try {
-      const res = await getCatrgories({ type: activeTab });
-      setData(res.data || []);
-    } catch (error) {
-      message.error(error.message);
+    const categories = localStorage.getItem("categories");
+    const currentCategories =
+      !!categories && JSON.parse(crypto.decrypt(categories))?.[activeTab];
+    if (!currentCategories) {
+      try {
+        const res = await getCatrgories({ type: activeTab });
+        setData(res.data || []);
+        setLocalStorage(res.data);
+      } catch (error) {
+        message.error(error.message);
+      }
+      return;
     }
-  }, [activeTab]);
+    setData(JSON.parse(crypto.decrypt(categories))?.[activeTab] || []);
+  }, [activeTab, setLocalStorage]);
 
   // 初始化加载和tab切换时获取数据
   useEffect(() => {
@@ -102,13 +131,14 @@ const useCategoryManagement = () => {
         const res = await deleteCategory({ key, type: activeTab });
         if (res.success) {
           setData(res.data);
+          setLocalStorage(res.data);
           message.success("删除成功");
         }
       } catch (error) {
         message.error("删除失败：" + error.message);
       }
     },
-    [activeTab]
+    [activeTab, setLocalStorage]
   );
 
   // 处理表单提交
@@ -160,6 +190,7 @@ const useCategoryManagement = () => {
             newData.push({ ...newNode, key: res.data.key });
             setData(newData);
           }
+          setLocalStorage(newData);
         }
 
         message.success("添加成功");
@@ -172,6 +203,7 @@ const useCategoryManagement = () => {
         });
         if (res.success) {
           setData(res.data);
+          setLocalStorage(res.data);
           message.success("修改成功");
         }
       }
@@ -185,7 +217,16 @@ const useCategoryManagement = () => {
         message.error("操作失败：" + error.message);
       }
     }
-  }, [form, editingNode, activeTab, data]);
+  }, [
+    form,
+    editingNode.isNew,
+    editingNode.level,
+    editingNode.parentKey,
+    editingNode.key,
+    activeTab,
+    data,
+    setLocalStorage,
+  ]);
 
   // 处理拖拽结束
   const handleDrop = useCallback(

@@ -4,7 +4,7 @@ const secret = "zach_front";
 
 const crypto = {
   // 加密
-  encrypt: (data: any): string => {
+  encrypt: (data: unknown): string => {
     return CryptoJS.AES.encrypt(JSON.stringify(data), secret).toString();
   },
   // 解密
