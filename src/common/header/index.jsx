@@ -10,8 +10,8 @@ const Header = ({ user }) => {
     {
       key: "trade",
       label: "交易明细",
-      // path:'/',
-      matchPaths: [],
+      path: "/transaction",
+      matchPaths: ["/transaction"],
     },
     {
       key: "analysis",

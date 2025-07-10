@@ -9,10 +9,9 @@ export function addTag(data) {
 }
 
 //  获取标签列表
-export function getTags(params) {
+export function getTags() {
   return request("/tag/list", {
     method: "GET",
-    params,
   });
 }
 
