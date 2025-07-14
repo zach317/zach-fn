@@ -5,7 +5,7 @@ import { formatAmount } from "utils/helpers";
 import dayjs from "dayjs";
 import "./index.less";
 
-const TransactionList = ({ list }) => {
+const TransactionList = ({ list, onEdit }) => {
   return (
     <div className="transaction-list">
       {list.length === 0 ? (
@@ -86,7 +86,7 @@ const TransactionList = ({ list }) => {
                         type="text"
                         size="small"
                         icon={<EditOutlined />}
-                        onClick={() => console.log("编辑", transaction.id)}
+                        onClick={() => onEdit(transaction)}
                       />
                       <Button
                         type="text"

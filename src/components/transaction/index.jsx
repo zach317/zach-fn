@@ -14,6 +14,8 @@ const Transaction = () => {
   const [pageSize] = useState(10);
   const [list, setList] = useState([]);
   const [totalStats, setTotalStats] = useState({});
+  const [modalVisible, setModalVisible] = useState(false);
+  const [editingTransaction, setEditingTransaction] = useState(null);
 
   const getList = useCallback(
     async (filters) => {
@@ -37,6 +39,24 @@ const Transaction = () => {
   useEffect(() => {
     getList();
   }, [getList]);
+
+  // 打开新增弹框
+  const handleAdd = () => {
+    setEditingTransaction(null);
+    setModalVisible(true);
+  };
+
+  // 打开编辑弹框
+  const handleEdit = (transaction) => {
+    setEditingTransaction(transaction);
+    setModalVisible(true);
+  };
+
+  // 关闭弹框
+  const handleModalClose = () => {
+    setModalVisible(false);
+    setEditingTransaction(null);
+  };
 
   return (
     <div className="transaction-page">
@@ -85,11 +105,11 @@ const Transaction = () => {
         icon={<PlusOutlined />}
         size="large"
         className="floating-add-btn"
-        onClick={() => console.log("新增交易")}
+        onClick={handleAdd}
       />
 
       {/* 交易列表 */}
-      <TransactionList list={list} />
+      <TransactionList list={list} onEdit={handleEdit} />
 
       {/* 分页 */}
       {totalStats.total > pageSize && (
@@ -107,7 +127,11 @@ const Transaction = () => {
           />
         </div>
       )}
-      <TransactionModal />
+      <TransactionModal
+        visible={modalVisible}
+        onClose={handleModalClose}
+        editData={editingTransaction}
+      />
     </div>
   );
 };
