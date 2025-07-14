@@ -1,0 +1,265 @@
+.filter-card {
+  margin-bottom: 24px;
+  border-radius: 12px;
+  border: 2px solid rgba(14, 176, 201, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: rgba(14, 176, 201, 0.3);
+    box-shadow: 0 4px 16px rgba(14, 176, 201, 0.1);
+  }
+
+  .filter-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    padding: 4px 0;
+
+    .filter-summary {
+      display: flex;
+      gap: 4px;
+      margin-left: auto;
+      flex-wrap: wrap;
+
+      .ant-tag {
+        margin: 0;
+        font-size: 12px;
+        background: rgba(14, 176, 201, 0.1);
+        border: 1px solid rgba(14, 176, 201, 0.3);
+        color: #0eb0c9;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .filter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 16px;
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 16px;
+    }
+
+    .filter-group {
+      .filter-label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+        display: block;
+      }
+
+      .amount-range-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .range-separator {
+          color: #666;
+          font-weight: 500;
+        }
+      }
+
+      .filter-toggle {
+        .toggle-header {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 12px 16px;
+          background: rgba(14, 176, 201, 0.05);
+          border: 1px solid rgba(14, 176, 201, 0.1);
+          border-radius: 8px;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background: rgba(14, 176, 201, 0.08);
+            border-color: rgba(14, 176, 201, 0.2);
+          }
+
+          .filter-label {
+            flex: 1;
+            margin-bottom: 0;
+            font-size: 14px;
+          }
+        }
+
+        .selected-items {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 4px;
+          margin-top: 8px;
+          padding: 0 4px;
+          min-height: 24px;
+
+          .ant-tag {
+            margin: 0;
+            font-size: 12px;
+            border-radius: 4px;
+            max-width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+      }
+
+      .tree-container-filter {
+        margin-top: 12px;
+        padding: 12px;
+        background: #fafafa;
+        border: 1px solid #e8e8e8;
+        border-radius: 8px;
+        max-height: 240px;
+        overflow-y: auto;
+
+        .ant-tree {
+          background: transparent;
+          font-size: 13px;
+
+          .ant-tree-node-content-wrapper {
+            padding: 2px 4px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+
+            &:hover {
+              background: rgba(14, 176, 201, 0.1);
+            }
+          }
+
+          .ant-tree-checkbox {
+            margin-right: 6px;
+          }
+
+          .ant-tree-switcher {
+            width: 16px;
+            height: 20px;
+            line-height: 20px;
+
+            .ant-tree-switcher-icon {
+              font-size: 10px;
+              color: #666;
+            }
+          }
+
+          .ant-tree-indent-unit {
+            width: 16px;
+          }
+        }
+
+        /* 滚动条样式 */
+        &::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: #f1f1f1;
+          border-radius: 3px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: #c1c1c1;
+          border-radius: 3px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+          background: #a8a8a8;
+        }
+      }
+    }
+
+    .filter-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid #f0f0f0;
+      margin-top: 8px;
+
+      .ant-btn {
+        min-width: 80px;
+        border-radius: 6px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+/* 优化Collapse面板动画 */
+.ant-collapse-content {
+  border-top: none !important;
+}
+
+.ant-collapse-content-box {
+  padding: 0 !important;
+}
+
+/* 优化Radio组样式 */
+.ant-radio-group {
+  .ant-radio-wrapper {
+    margin-right: 16px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+/* 优化InputNumber样式 */
+.ant-input-number {
+  border-radius: 6px;
+
+  &:hover {
+    border-color: #0eb0c9;
+  }
+
+  &:focus {
+    border-color: #0eb0c9;
+    box-shadow: 0 0 0 2px rgba(14, 176, 201, 0.1);
+  }
+}
+
+/* 优化DatePicker样式 */
+.ant-picker {
+  border-radius: 6px;
+
+  &:hover {
+    border-color: #0eb0c9;
+  }
+
+  &.ant-picker-focused {
+    border-color: #0eb0c9;
+    box-shadow: 0 0 0 2px rgba(14, 176, 201, 0.1);
+  }
+}
+
+/* 优化Input样式 */
+.ant-input {
+  border-radius: 6px;
+
+  &:hover {
+    border-color: #0eb0c9;
+  }
+
+  &:focus {
+    border-color: #0eb0c9;
+    box-shadow: 0 0 0 2px rgba(14, 176, 201, 0.1);
+  }
+}
+
+/* 优化Switch样式 */
+.ant-switch {
+  &.ant-switch-checked {
+    background-color: #0eb0c9;
+  }
+
+  &:hover.ant-switch-checked {
+    background-color: #0ca0b8;
+  }
+}

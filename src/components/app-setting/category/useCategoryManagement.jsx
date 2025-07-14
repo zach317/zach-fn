@@ -26,13 +26,13 @@ const useCategoryManagement = () => {
         const newData = { ...prevData, [activeTab]: data };
         localStorage.setItem(
           "categories",
-          crypto.encrypt(JSON.stringify(newData))
+          crypto.encrypt(newData)
         );
         return;
       }
       localStorage.setItem(
         "categories",
-        crypto.encrypt(JSON.stringify({ [activeTab]: data }))
+        crypto.encrypt({ [activeTab]: data })
       );
     },
     [activeTab]

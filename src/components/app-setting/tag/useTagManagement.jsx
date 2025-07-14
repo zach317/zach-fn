@@ -10,7 +10,7 @@ const useTagManagement = () => {
   const [tags, setTags] = useState([]);
 
   const setLocalStorage = (data) => {
-    localStorage.setItem("tags", crypto.encrypt(JSON.stringify(data)));
+    localStorage.setItem("tags", crypto.encrypt(data));
   };
 
   // 数据获取
