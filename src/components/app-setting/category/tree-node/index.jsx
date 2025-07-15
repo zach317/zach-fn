@@ -48,7 +48,7 @@ const TreeNode = ({ nodeData, onAdd, onEdit, onDelete }) => {
         <Tooltip title="删除">
           <Popconfirm
             title="确定要删除这个分类吗？"
-            description="删除后该分类及其所有子分类都将被删除"
+            description="删除后该分类的所有交易、子分类都将被删除"
             onConfirm={(e) => {
               e?.stopPropagation();
               onDelete(key);

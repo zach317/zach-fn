@@ -26,7 +26,7 @@ const useTagManagement = () => {
       }
       return;
     }
-    setTags(JSON.parse(crypto.decrypt(tags)) || []);
+    setTags(crypto.decrypt(tags) || []);
   }, []);
 
   // 初始化加载和tab切换时获取数据
