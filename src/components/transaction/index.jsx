@@ -3,7 +3,7 @@ import { Card, Button, Pagination, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import TransactionFilter from "./filter";
 import TransactionList from "./list";
-import TransactionModal from "./modal";
+import TransactionDrawer from "./drawer";
 import { getTransactionList } from "./services";
 import { formatAmount } from "utils/helpers";
 
@@ -58,6 +58,10 @@ const Transaction = () => {
     setEditingTransaction(null);
   };
 
+  const handleSuccess = () => {
+    getList();
+  };
+
   return (
     <div className="transaction-page">
       <div className="page-title">账单管理</div>
@@ -109,7 +113,11 @@ const Transaction = () => {
       />
 
       {/* 交易列表 */}
-      <TransactionList list={list} onEdit={handleEdit} />
+      <TransactionList
+        list={list}
+        onEdit={handleEdit}
+        onSuccess={handleSuccess}
+      />
 
       {/* 分页 */}
       {totalStats.total > pageSize && (
@@ -127,10 +135,11 @@ const Transaction = () => {
           />
         </div>
       )}
-      <TransactionModal
+      <TransactionDrawer
         visible={modalVisible}
         onClose={handleModalClose}
         editData={editingTransaction}
+        onSuccess={handleSuccess}
       />
     </div>
   );

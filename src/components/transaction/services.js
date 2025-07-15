@@ -18,3 +18,24 @@ export function getTags() {
     method: "GET",
   });
 }
+
+export function addTransaction(data) {
+  return request("/transaction/add", {
+    method: "POST",
+    data,
+  });
+}
+
+export function updateTransaction(data) {
+  return request("/transaction/update", {
+    method: "POST",
+    data,
+  });
+}
+
+export function deleteTransaction(data) {
+  return request("/transaction/delete", {
+    method: "POST",
+    data,
+  });
+}

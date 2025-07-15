@@ -1,0 +1,389 @@
+// transaction-drawer样式
+.transaction-drawer {
+  .ant-drawer-header {
+    background: linear-gradient(135deg, #f8f9fa 0%, fade(#0eb0c9, 10%) 100%);
+    border-bottom: 1px solid fade(#0eb0c9, 15%);
+
+    .drawer-title {
+      .title-content {
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+
+        .transaction-type {
+          margin-left: 8px;
+          padding: 4px 12px;
+          border-radius: 12px;
+          font-size: 14px;
+          font-weight: 500;
+
+          &.income {
+            background: linear-gradient(135deg, #28a745, lighten(#28a745, 10%));
+            color: white;
+          }
+
+          &.expense {
+            background: linear-gradient(135deg, #dc3545, lighten(#dc3545, 10%));
+            color: white;
+          }
+        }
+      }
+    }
+  }
+
+  .ant-drawer-body {
+    padding: 24px;
+    background: #fafafa;
+  }
+
+  .ant-drawer-footer {
+    background: #fff;
+    border-top: 1px solid #f0f0f0;
+    padding: 16px 24px;
+
+    .drawer-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+
+      .ant-btn {
+        height: 40px;
+        border-radius: 8px;
+        font-weight: 500;
+
+        &:not(.ant-btn-primary) {
+          border: 1px solid #d9d9d9;
+
+          &:hover {
+            border-color: #0eb0c9;
+            color: #0eb0c9;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 表单样式
+.transaction-form {
+  .ant-form-item {
+    margin-bottom: 24px;
+
+    .ant-form-item-label {
+      padding-bottom: 8px;
+
+      > label {
+        font-weight: 600;
+        color: #333;
+        font-size: 15px;
+
+        &.ant-form-item-required {
+          &::before {
+            color: #dc3545;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  // 交易类型单选组
+  .type-radio-group {
+    width: 100%;
+    display: flex;
+
+    .ant-radio-button-wrapper {
+      flex: 1;
+      text-align: center;
+      height: 44px;
+      line-height: 42px;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: all 0.3s;
+
+      &:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        margin-right: 2px;
+      }
+
+      &:last-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      &.expense-radio {
+        &.ant-radio-button-wrapper-checked {
+          background: linear-gradient(135deg, #dc3545, lighten(#dc3545, 5%));
+          border-color: #dc3545;
+          color: white;
+          box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+        }
+      }
+
+      &.income-radio {
+        &.ant-radio-button-wrapper-checked {
+          background: linear-gradient(135deg, #28a745, lighten(#28a745, 5%));
+          border-color: #28a745;
+          color: white;
+          box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+        }
+      }
+    }
+  }
+
+  // 金额输入框
+  .amount-input {
+    height: 44px;
+    font-size: 16px;
+    font-weight: 500;
+
+    .ant-input-number-input {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .ant-input-number-prefix {
+      color: #0eb0c9;
+      font-size: 16px;
+    }
+  }
+
+  // 分类选择器
+  .category-form-item {
+    .category-selector {
+      .category-btn {
+        height: 44px;
+        border: 2px dashed #d9d9d9;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0 16px;
+        transition: all 0.3s;
+
+        &:hover {
+          border-color: #0eb0c9;
+          color: #0eb0c9;
+        }
+
+        .selected-category {
+          color: #333;
+          font-weight: 500;
+        }
+
+        .category-placeholder {
+          color: #999;
+        }
+      }
+
+      .selected-category-display {
+        margin-top: 8px;
+
+        .category-tag {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  // 日期选择器
+  .date-picker {
+    height: 44px;
+
+    .ant-picker-suffix {
+      color: #0eb0c9;
+    }
+  }
+
+  // 标签选择区域
+  .tag-form-item {
+    .tag-section {
+      .tag-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+        font-weight: 500;
+        color: #333;
+
+        .selected-count {
+          color: #0eb0c9;
+          font-size: 12px;
+          background: fade(#0eb0c9, 10%);
+          padding: 2px 8px;
+          border-radius: 10px;
+          margin-left: auto;
+        }
+      }
+
+      .selected-tags {
+        margin-bottom: 12px;
+        padding: 12px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+
+        .ant-tag {
+          margin-bottom: 4px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  // 标签选择器
+  .tag-selector {
+    .tag-collapse {
+      .ant-collapse-item {
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        overflow: hidden;
+
+        .ant-collapse-header {
+          background: #f8f9fa;
+          padding: 12px 16px;
+
+          .tag-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .tag-count {
+              color: #666;
+              font-size: 12px;
+            }
+          }
+        }
+
+        .ant-collapse-content {
+          border-top: 1px solid #e9ecef;
+
+          .ant-collapse-content-box {
+            padding: 16px;
+
+            .tag-list {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 8px;
+
+              .tag-item {
+                cursor: pointer;
+                padding: 6px 12px;
+                border-radius: 12px;
+                font-size: 13px;
+                font-weight: 500;
+                transition: all 0.2s;
+                border: 1px solid #e9ecef;
+                background: #fff;
+
+                &:hover {
+                  transform: translateY(-1px) scale(1.05);
+                  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 备注输入框
+  .description-input {
+    resize: none;
+
+    .ant-input {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  }
+}
+
+// 分类选择弹框样式
+.category-modal {
+  .ant-modal-header {
+    background: linear-gradient(135deg, #f8f9fa 0%, fade(#0eb0c9, 10%) 100%);
+    border-bottom: 1px solid fade(#0eb0c9, 15%);
+
+    .category-modal-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: #333;
+    }
+  }
+
+  .category-modal-content {
+    .category-tip {
+      background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+      border: 1px solid #ffeaa7;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      color: #856404;
+    }
+
+    .category-tree {
+      .ant-tree-node-content-wrapper {
+        padding: 8px 12px;
+        border-radius: 6px;
+        transition: all 0.2s;
+
+        &:hover {
+          background: fade(#0eb0c9, 10%);
+        }
+
+        &.ant-tree-node-selected {
+          background: linear-gradient(135deg, #0eb0c9, lighten(#0eb0c9, 5%));
+          color: white;
+        }
+
+        .tree-node {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          &.leaf-node {
+            color: #333;
+            font-weight: 500;
+
+            .leaf-icon {
+              color: #28a745;
+              font-size: 12px;
+            }
+          }
+
+          &.parent-node {
+            color: #666;
+            font-weight: 400;
+          }
+        }
+      }
+
+      .ant-tree-node-content-wrapper-open,
+      .ant-tree-node-content-wrapper-close {
+        &.ant-tree-node-selected {
+          background: linear-gradient(135deg, #0eb0c9, lighten(#0eb0c9, 5%));
+          color: white;
+        }
+      }
+
+      .ant-tree-treenode-disabled {
+        .ant-tree-node-content-wrapper {
+          color: #bbb !important;
+          cursor: not-allowed;
+
+          &:hover {
+            background: transparent;
+          }
+        }
+      }
+    }
+  }
+}

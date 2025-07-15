@@ -1,11 +1,22 @@
 import React from "react";
-import { Card, Button, Tag, Empty } from "antd";
+import { Card, Button, Tag, Empty, message, Popconfirm } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { formatAmount } from "utils/helpers";
+import { formatAmount, hexToRGBA } from "utils/helpers";
 import dayjs from "dayjs";
+import { deleteTransaction } from "../services";
 import "./index.less";
 
-const TransactionList = ({ list, onEdit }) => {
+const TransactionList = ({ list, onEdit, onSuccess }) => {
+  const handleDelete = async (transactionId) => {
+    try {
+      await deleteTransaction({ transactionId });
+      message.success("删除成功");
+      onSuccess?.();
+    } catch (error) {
+      message.error(error.message || "删除失败");
+    }
+  };
+
   return (
     <div className="transaction-list">
       {list.length === 0 ? (
@@ -65,11 +76,16 @@ const TransactionList = ({ list, onEdit }) => {
                       <div className="transaction-tags">
                         {transaction.tags.map((tag) => (
                           <Tag
-                            key={tag}
+                            key={tag.id}
                             size="small"
                             className="transaction-tag"
+                            style={{
+                              backgroundColor: hexToRGBA(tag.color, 0.1),
+                              border: `1px solid ${hexToRGBA(tag.color, 0.3)}`,
+                              color: tag.color,
+                            }}
                           >
-                            #{tag}
+                            #{tag.name}
                           </Tag>
                         ))}
                       </div>
@@ -88,12 +104,20 @@ const TransactionList = ({ list, onEdit }) => {
                         icon={<EditOutlined />}
                         onClick={() => onEdit(transaction)}
                       />
-                      <Button
-                        type="text"
-                        size="small"
-                        icon={<DeleteOutlined />}
-                        onClick={() => console.log("删除", transaction.id)}
-                      />
+                      <Popconfirm
+                        title="确认删除"
+                        description="删除后无法恢复，确定要删除这条交易记录吗？"
+                        onConfirm={() => handleDelete(transaction.id)}
+                        okText="确定"
+                        cancelText="取消"
+                        okType="danger"
+                      >
+                        <Button
+                          type="text"
+                          size="small"
+                          icon={<DeleteOutlined />}
+                        />
+                      </Popconfirm>
                     </div>
                   </div>
                 </div>

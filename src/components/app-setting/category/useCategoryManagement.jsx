@@ -22,18 +22,12 @@ const useCategoryManagement = () => {
     (data) => {
       const prev = localStorage.getItem("categories");
       if (prev) {
-        const prevData = JSON.parse(crypto.decrypt(prev));
+        const prevData = crypto.decrypt(prev);
         const newData = { ...prevData, [activeTab]: data };
-        localStorage.setItem(
-          "categories",
-          crypto.encrypt(newData)
-        );
+        localStorage.setItem("categories", crypto.encrypt(newData));
         return;
       }
-      localStorage.setItem(
-        "categories",
-        crypto.encrypt({ [activeTab]: data })
-      );
+      localStorage.setItem("categories", crypto.encrypt({ [activeTab]: data }));
     },
     [activeTab]
   );
@@ -42,7 +36,7 @@ const useCategoryManagement = () => {
   const fetchData = useCallback(async () => {
     const categories = localStorage.getItem("categories");
     const currentCategories =
-      !!categories && JSON.parse(crypto.decrypt(categories))?.[activeTab];
+      !!categories && crypto.decrypt(categories)?.[activeTab];
     if (!currentCategories) {
       try {
         const res = await getCatrgories({ type: activeTab });
@@ -53,7 +47,7 @@ const useCategoryManagement = () => {
       }
       return;
     }
-    setData(JSON.parse(crypto.decrypt(categories))?.[activeTab] || []);
+    setData(crypto.decrypt(categories)?.[activeTab] || []);
   }, [activeTab, setLocalStorage]);
 
   // 初始化加载和tab切换时获取数据
