@@ -57,6 +57,7 @@ const Filter = ({ setCurrentPage, getList }) => {
   };
 
   const getTagList = useCallback(async () => {
+    if (!showTags) return;
     const tagStorage = localStorage.getItem("tags");
     if (tagStorage) {
       const tags = crypto.decrypt(tagStorage);
@@ -72,38 +73,51 @@ const Filter = ({ setCurrentPage, getList }) => {
         message.error(error.message);
       }
     }
-  }, []);
+  }, [showTags]);
+
+  const handleRadioChange = (e) => {
+    setFilters((prev) => ({
+      ...prev,
+      transactionType: e.target.value,
+    }));
+  };
 
   const getCategories = useCallback(async () => {
+    if (!showCategories) return;
     const categoryStorage = localStorage.getItem("categories");
 
     if (categoryStorage) {
       const categories = crypto.decrypt(categoryStorage);
       // 验证数据有效性，若无效则重新获取
       if (categories.expense && categories.income) {
-        setCategories([...categories.income, ...categories.expense]);
+        setCategories(
+          filters.transactionType === "all"
+            ? [...categories.income, ...categories.expense]
+            : categories[filters.transactionType]
+        );
       } else {
         await handleFetchAndCacheCategories();
       }
     } else {
       await handleFetchAndCacheCategories();
     }
-  }, []);
+  }, [filters.transactionType, handleFetchAndCacheCategories, showCategories]);
 
-  const handleFetchAndCacheCategories = async () => {
+  const handleFetchAndCacheCategories = useCallback(async () => {
     try {
       const res = await getAllCatrgories();
       if (res.success) {
-        const { income, expense } = res.data;
-        const allCategories = [...income, ...expense];
-
-        setCategories(allCategories);
+        setCategories(
+          filters.transactionType === "all"
+            ? [...categories.income, ...categories.expense]
+            : categories[filters.transactionType]
+        );
         localStorage.setItem("categories", crypto.encrypt(res.data));
       }
     } catch (error) {
       message.error(error.message);
     }
-  };
+  }, [categories, filters.transactionType]);
 
   const init = useCallback(async () => {
     getCategories();
@@ -243,12 +257,7 @@ const Filter = ({ setCurrentPage, getList }) => {
                 <label className="filter-label">收支类型</label>
                 <Radio.Group
                   value={filters.transactionType}
-                  onChange={(e) =>
-                    setFilters((prev) => ({
-                      ...prev,
-                      transactionType: e.target.value,
-                    }))
-                  }
+                  onChange={handleRadioChange}
                 >
                   <Radio value="all">全部</Radio>
                   <Radio value="income">收入</Radio>
@@ -310,7 +319,10 @@ const Filter = ({ setCurrentPage, getList }) => {
                   placeholder="搜索备注"
                   value={filters.description}
                   onChange={(e) =>
-                    setFilters((prev) => ({ ...prev, description: e.target.value }))
+                    setFilters((prev) => ({
+                      ...prev,
+                      description: e.target.value,
+                    }))
                   }
                   prefix={<SearchOutlined />}
                   allowClear

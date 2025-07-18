@@ -72,7 +72,9 @@ const TransactionList = ({ list, onEdit, onSuccess }) => {
                       <div className="transaction-category">
                         {transaction.category.name}
                       </div>
-                      <div className="transaction-note">{transaction.note}</div>
+                      <div className="transaction-description">
+                        {transaction.description}
+                      </div>
                       <div className="transaction-tags">
                         {transaction.tags.map((tag) => (
                           <Tag
