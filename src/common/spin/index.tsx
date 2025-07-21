@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { Spin } from "antd";
 import * as echarts from "echarts";
 import "./index.less";
 
@@ -19,7 +18,6 @@ const ChartLoading: React.FC<ChartLoadingProps> = ({
   const indicatorRef = useRef<HTMLDivElement>(null);
   const chartInstance = useRef<echarts.ECharts | null>(null);
 
-  // 根据size调整动画参数
   const getAnimationConfig = () => {
     switch (size) {
       case "small":
@@ -52,7 +50,6 @@ const ChartLoading: React.FC<ChartLoadingProps> = ({
   const { barCount, barWidth, barHeight, spacing, containerSize } =
     getAnimationConfig();
 
-  // ECharts柱状图Loading配置
   const getLoadingOption = () => ({
     graphic: {
       elements: [
@@ -105,82 +102,61 @@ const ChartLoading: React.FC<ChartLoadingProps> = ({
     },
   });
 
-  // 创建自定义ECharts指示器
-  const createCustomIndicator = () => {
-    if (!indicatorRef.current) return null;
+  const initChart = () => {
+    if (!indicatorRef.current) return;
 
-    if (!chartInstance.current) {
-      chartInstance.current = echarts.init(indicatorRef.current);
+    if (chartInstance.current) {
+      chartInstance.current.dispose();
+      chartInstance.current = null;
     }
 
-    chartInstance.current.setOption(getLoadingOption());
+    const container = indicatorRef.current;
 
-    return (
-      <div
-        ref={indicatorRef}
-        style={{
-          width: containerSize,
-          height: barHeight * 3,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      />
-    );
+    // 延迟一帧保证 DOM 尺寸可用
+    requestAnimationFrame(() => {
+      if (container.clientWidth === 0 || container.clientHeight === 0) return;
+
+      chartInstance.current = echarts.init(container);
+      chartInstance.current.setOption(getLoadingOption());
+    });
   };
 
   useEffect(() => {
     if (loading) {
-      createCustomIndicator();
+      initChart();
+    } else if (chartInstance.current) {
+      chartInstance.current.dispose();
+      chartInstance.current = null;
     }
-
-    return () => {
-      if (chartInstance.current && !loading) {
-        chartInstance.current.dispose();
-        chartInstance.current = null;
-      }
-    };
   }, [loading, size]);
 
-  // 清理资源
   useEffect(() => {
     return () => {
       if (chartInstance.current) {
         chartInstance.current.dispose();
+        chartInstance.current = null;
       }
     };
   }, []);
 
-  // 自定义指示器组件
-  const customIndicator = (
-    <div
-      style={{
-        width: containerSize,
-        height: barHeight * 3,
-        paddingTop: barHeight,
-      }}
-    >
-      <div
-        ref={indicatorRef}
-        style={{
-          width: "100%",
-          height: "100%",
-        }}
-      />
-    </div>
-  );
-
   return (
-    <Spin
-      className="zach-spin-wrap"
-      spinning={loading}
-      tip={tip}
-      indicator={customIndicator}
-      size={size}
-      delay={500}
-    >
-      {children}
-    </Spin>
+    <div className="zach-chart-loading-container">
+      {loading && (
+        <div className="zach-loading-overlay">
+          <div
+            className="zach-loading-indicator"
+            style={{
+              width: containerSize,
+              height: barHeight * 3,
+            }}
+          >
+            <div ref={indicatorRef} style={{ width: "100%", height: "100%" }} />
+            <div className="zach-loading-tip">{tip}</div>
+          </div>
+        </div>
+      )}
+      <div className="zach-chart-content">{children}</div>
+    </div>
   );
 };
 
