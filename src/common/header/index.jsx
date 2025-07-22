@@ -16,8 +16,8 @@ const Header = ({ user }) => {
     {
       key: "analysis",
       label: "账目分析",
-      // path:'/',
-      matchPaths: [],
+      path: "/analysis",
+      matchPaths: ["/analysis"],
     },
     {
       key: "assets",

@@ -11,6 +11,7 @@ import AppSetting from "@/app-setting";
 import Category from "@/app-setting/category";
 import Tag from "@/app-setting/tag";
 import Transaction from "@/transaction";
+import Analysis from "@/analysis";
 
 const App: React.FC = () => {
   return (
@@ -28,6 +29,7 @@ const App: React.FC = () => {
           <Route path="/setting/tag" element={<Tag />} />
         </Route>
         <Route path="/transaction" element={<Transaction />} />
+        <Route path="/analysis" element={<Analysis />} />
       </Route>
     </Routes>
   );
