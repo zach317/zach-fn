@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import CategoryRadio from "./category-ratio";
 import IncomeAndExpense from "./income-and-expense";
+import Rank from "./rank";
+import { getCategoryRank } from "./services";
 
 const FinancialAnalysis = () => {
+  const [data, setData] = useState({});
+  const getData = useCallback(async () => {
+    const res = await getCategoryRank();
+    if (res.success) {
+      setData(res.data);
+    }
+  }, []);
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
   return (
     <div
       style={{
@@ -67,6 +80,8 @@ const FinancialAnalysis = () => {
           marginBottom: "32px",
         }}
       >
+        <Rank type="expense" data={data.expense} />
+        <Rank type="income" data={data.income} />
         {/* TODO: 日历图，分类排行等其他图表 */}
       </div>
     </div>

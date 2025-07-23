@@ -13,3 +13,10 @@ export function getCategoryRatio(data) {
     data,
   });
 }
+
+export function getCategoryRank(data) {
+  return request("/analysis/category-rank", {
+    method: "GET",
+    data,
+  });
+}
