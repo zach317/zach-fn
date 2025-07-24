@@ -20,3 +20,10 @@ export function getCategoryRank(data) {
     data,
   });
 }
+
+export function getMonthAmount(data) {
+  return request("/analysis/month-amount", {
+    method: "GET",
+    data,
+  });
+}
