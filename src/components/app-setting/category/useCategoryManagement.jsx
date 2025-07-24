@@ -153,41 +153,11 @@ const useCategoryManagement = () => {
           parentKey: editingNode.parentKey,
         });
 
-        let newData = [...data];
         if (res.success) {
-          if (editingNode.parentKey) {
-            // 添加到父节点下
-            const addToParent = (data) => {
-              return data.map((item) => {
-                if (item.key === editingNode.parentKey) {
-                  return {
-                    ...item,
-                    children: [
-                      ...(item.children || []),
-                      { ...newNode, key: res.data.key },
-                    ],
-                  };
-                }
-                if (item.children) {
-                  return {
-                    ...item,
-                    children: addToParent(item.children),
-                  };
-                }
-                return item;
-              });
-            };
-            newData = addToParent(newData);
-            setData(newData);
-          } else {
-            // 添加到根级别
-            newData.push({ ...newNode, key: res.data.key });
-            setData(newData);
-          }
-          setLocalStorage(newData);
+          setData(res.data);
+          setLocalStorage(res.data);
+          message.success("添加成功");
         }
-
-        message.success("添加成功");
       } else {
         // 编辑节点
         const res = await updateCategory({
@@ -218,7 +188,6 @@ const useCategoryManagement = () => {
     editingNode.parentKey,
     editingNode.key,
     activeTab,
-    data,
     setLocalStorage,
   ]);
 
