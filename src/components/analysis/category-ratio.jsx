@@ -1,24 +1,65 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Card, Button, Tag } from "antd";
+import { Card, Button, Tag, Select, DatePicker } from "antd";
 import { PieChartOutlined } from "@ant-design/icons";
 import { getCategoryRatio } from "./services";
+import dayjs from "dayjs";
+
 import * as echarts from "echarts";
 
 const CategoryRadio = () => {
   const categoryPieRef = useRef(null);
   const [categoryLevel, setCategoryLevel] = useState([]); // 路径数组
   const [data, setData] = useState([]);
+  const [type, setType] = useState("expense");
+  const [rangeType, setRangeType] = useState("all"); // all = 不筛选
+  const [dateRange, setDateRange] = useState([]);
 
-  const getData = async () => {
-    const res = await getCategoryRatio();
-    if (res.success) {
-      setData(res.data);
+  const getData = useCallback(async () => {
+    const now = dayjs();
+    let startDate = null,
+      endDate = null;
+
+    switch (rangeType) {
+      case "thisMonth":
+        startDate = now.startOf("month");
+        endDate = now.endOf("month");
+        break;
+      case "lastMonth":
+        startDate = now.subtract(1, "month").startOf("month");
+        endDate = now.subtract(1, "month").endOf("month");
+        break;
+      case "ytd":
+        startDate = now.startOf("year");
+        endDate = now;
+        break;
+      case "lastYear":
+        startDate = now.subtract(1, "year").startOf("year");
+        endDate = now.subtract(1, "year").endOf("year");
+        break;
+      case "custom":
+        if (dateRange.length === 2) {
+          startDate = dayjs(dateRange[0]);
+          endDate = dayjs(dateRange[1]);
+        } else {
+          return;
+        }
+        break;
+      default:
+        break;
     }
-  };
+
+    const res = await getCategoryRatio({
+      type,
+      startDate: startDate?.format("YYYY-MM-DD"),
+      endDate: endDate?.format("YYYY-MM-DD"),
+    });
+
+    if (res.success) setData(res.data);
+  }, [dateRange, rangeType, type]);
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
   // 根据 categoryLevel 计算当前节点
   const findCurrentCategory = useCallback(
     (path) => {
@@ -87,23 +128,69 @@ const CategoryRadio = () => {
     <Card
       title={
         <>
-          <PieChartOutlined style={{ color: "#0eb0c9", marginRight: 8 }} />
-          消费分类占比
+          <PieChartOutlined style={{ color: "#0eb0c9", marginRight: 4 }} />
+          分类占比
         </>
       }
       style={{ borderRadius: "16px", boxShadow: "0 4px 16px rgba(0,0,0,0.1)" }}
       extra={
-        categoryLevel.length > 0 && (
-          <Button
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 8,
+            justifyContent: "flex-end",
+          }}
+        >
+          {/* 类型选择 */}
+          <Select
+            value={type}
+            onChange={setType}
+            options={[
+              { label: "支出", value: "expense" },
+              { label: "收入", value: "income" },
+            ]}
             size="small"
-            onClick={() => setCategoryLevel((prev) => prev.slice(0, -1))}
-            style={{ borderRadius: "8px" }}
-          >
-            返回
-          </Button>
-        )
+            style={{ width: 80 }}
+          />
+
+          {/* 时间范围选择 */}
+          <Select
+            value={rangeType}
+            onChange={(val) => setRangeType(val)}
+            options={[
+              { label: "不限时间", value: "all" },
+              { label: "本月", value: "thisMonth" },
+              { label: "上月", value: "lastMonth" },
+              { label: "年初至今", value: "ytd" },
+              { label: "去年", value: "lastYear" },
+              { label: "自定义", value: "custom" },
+            ]}
+            size="small"
+            style={{ width: 100 }}
+          />
+
+          {/* 日期范围选择器：仅在选择自定义时显示 */}
+          {rangeType === "custom" && (
+            <DatePicker.RangePicker
+              value={dateRange}
+              onChange={(val) => setDateRange(val || [])}
+              size="small"
+            />
+          )}
+        </div>
       }
     >
+      {/* 返回按钮保留 */}
+      {categoryLevel.length > 0 && (
+        <Button
+          size="small"
+          onClick={() => setCategoryLevel((prev) => prev.slice(0, -1))}
+          style={{ borderRadius: "8px", position: "absolute", zIndex: 1 }}
+        >
+          返回
+        </Button>
+      )}
       <div ref={categoryPieRef} style={{ height: "400px" }} />
       {categoryLevel.length > 0 && (
         <div style={{ textAlign: "center", marginTop: "8px" }}>

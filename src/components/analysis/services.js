@@ -1,16 +1,16 @@
 import request from "utils/request";
 
-export function getIncomeAndExpense(data) {
+export function getIncomeAndExpense(params) {
   return request("/analysis/income-and-expense", {
     method: "GET",
-    data,
+    params,
   });
 }
 
-export function getCategoryRatio(data) {
+export function getCategoryRatio(params) {
   return request("/analysis/category-radio", {
     method: "GET",
-    data,
+    params,
   });
 }
 

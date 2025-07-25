@@ -61,7 +61,7 @@ const FinancialAnalysis = () => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "2fr 1fr",
+          gridTemplateColumns: "3fr 2fr",
           gap: "24px",
           marginBottom: "32px",
         }}

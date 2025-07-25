@@ -16,6 +16,12 @@ const Rank = ({ type = "expense", data = [] }) => {
           trigger: "axis",
           axisPointer: { type: "shadow" },
         },
+        grid: {
+          left: "4%",
+          bottom: "4%",
+          top: "3%",
+          containLabel: true,
+        },
         xAxis: {
           type: "value",
           axisLabel: { color: "#999" },
@@ -34,7 +40,7 @@ const Rank = ({ type = "expense", data = [] }) => {
               value: item.amount,
               itemStyle: { color: item.color },
             })),
-            barWidth: "60%",
+            barWidth: "80%",
             label: {
               show: true,
               position: "right",
@@ -61,7 +67,7 @@ const Rank = ({ type = "expense", data = [] }) => {
         boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
       }}
     >
-      <div ref={categoryBarRef} style={{ height: "280px" }} />
+      <div ref={categoryBarRef} style={{ height: "320px" }} />
     </Card>
   );
 };
