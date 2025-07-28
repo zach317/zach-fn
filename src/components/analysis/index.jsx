@@ -1,22 +1,10 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React from "react";
 import CategoryRadio from "./category-ratio";
 import IncomeAndExpense from "./income-and-expense";
 import Rank from "./rank";
 import CalendarChart from "./calender";
-import { getCategoryRank } from "./services";
 
 const FinancialAnalysis = () => {
-  const [data, setData] = useState({});
-  const getData = useCallback(async () => {
-    const res = await getCategoryRank();
-    if (res.success) {
-      setData(res.data);
-    }
-  }, []);
-
-  useEffect(() => {
-    getData();
-  }, [getData]);
   return (
     <div
       style={{
@@ -55,8 +43,6 @@ const FinancialAnalysis = () => {
         </div>
       </div>
 
-      {/*TODO: 核心指标卡片 */}
-
       {/* 主要图表区域 */}
       <div
         style={{
@@ -76,14 +62,13 @@ const FinancialAnalysis = () => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr",
+          gridTemplateColumns: "2fr 3fr",
           gap: "24px",
           marginBottom: "32px",
         }}
       >
         <CalendarChart />
-        <Rank type="expense" data={data.expense} />
-        <Rank type="income" data={data.income} />
+        <Rank />
       </div>
     </div>
   );

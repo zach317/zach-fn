@@ -74,7 +74,6 @@ const CategoryRadio = () => {
     [data]
   );
 
-  /* ---------- 图表初始化 & 更新 ---------- */
   useEffect(() => {
     if (!categoryPieRef.current) return;
     const chart = echarts.init(categoryPieRef.current);

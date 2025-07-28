@@ -1,34 +1,39 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Card } from "antd";
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import { Card, DatePicker } from "antd";
 import { CalendarOutlined } from "@ant-design/icons";
 import * as echarts from "echarts";
 import { getMonthAmount } from "./services";
 import dayjs from "dayjs";
 
+// 图标布局
+const layouts = [
+  [[0, 0]],
+  [
+    [-0.25, 0],
+    [0.25, 0],
+  ],
+];
 const CalendarChart = () => {
   const calendarRef = useRef(null);
+  const [month, setMonth] = useState(dayjs()); // 当前月份
 
   const [data, setData] = useState([]);
 
-  // 图标布局
-  const layouts = [
-    [[0, 0]],
-    [
-      [-0.25, 0],
-      [0.25, 0],
-    ],
-  ];
+  const getData = useCallback(async () => {
+    const res = await getMonthAmount({
+      month: month.format("YYYY-MM"),
+    });
 
-  const getData = async () => {
-    const res = await getMonthAmount();
     if (res.success) {
-      setData(res.data);
+      let result = res.data;
+
+      setData(result);
     }
-  };
+  }, [month]);
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   // svg path
   const path =
@@ -42,7 +47,7 @@ const CalendarChart = () => {
     if (!calendarRef.current) return;
     const chart = echarts.init(calendarRef.current);
 
-    const yearMonth = dayjs().format("YYYY-MM");
+    const yearMonth = dayjs(month).format("YYYY-MM");
 
     chart.setOption({
       tooltip: {
@@ -59,11 +64,11 @@ const CalendarChart = () => {
       calendar: [
         {
           left: "center",
-          top: "middle",
-          cellSize: [70, 70],
+          top: 35,
+          cellSize: [80, 60],
           yearLabel: { show: false },
           orient: "vertical",
-          dayLabel: { firstDay: 1, nameMap: "cn" },
+          dayLabel: { firstDay: 1, nameMap: "ZH", show: true, margin: 15 },
           monthLabel: { show: false },
           range: yearMonth,
         },
@@ -133,7 +138,7 @@ const CalendarChart = () => {
     });
 
     return () => chart.dispose();
-  }, [data]);
+  }, [data, month]);
 
   return (
     <Card
@@ -143,9 +148,21 @@ const CalendarChart = () => {
           收支日历
         </>
       }
+      extra={
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          {/* 月份选择 */}
+          <DatePicker
+            picker="month"
+            value={month}
+            onChange={(val) => setMonth(val || dayjs())}
+            allowClear={false}
+            size="small"
+          />
+        </div>
+      }
       style={{ borderRadius: 12, boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}
     >
-      <div ref={calendarRef} style={{ height: 350 }} />
+      <div ref={calendarRef} style={{ height: 400 }} />
     </Card>
   );
 };

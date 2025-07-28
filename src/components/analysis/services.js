@@ -14,16 +14,16 @@ export function getCategoryRatio(params) {
   });
 }
 
-export function getCategoryRank(data) {
+export function getCategoryRank(params) {
   return request("/analysis/category-rank", {
     method: "GET",
-    data,
+    params,
   });
 }
 
-export function getMonthAmount(data) {
+export function getMonthAmount(params) {
   return request("/analysis/month-amount", {
     method: "GET",
-    data,
+    params,
   });
 }
