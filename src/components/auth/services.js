@@ -21,3 +21,9 @@ export function userLogin(data) {
     data,
   });
 }
+
+export function getSecurityQuestions() {
+  return request("/users/security-questions", {
+    method: "GET",
+  });
+}
