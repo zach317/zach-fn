@@ -109,15 +109,15 @@ const Filter = ({ setCurrentPage, getList }) => {
       if (res.success) {
         setCategories(
           filters.transactionType === "all"
-            ? [...categories.income, ...categories.expense]
-            : categories[filters.transactionType]
+            ? [...res.data.income, ...res.data.expense]
+            : res.data[filters.transactionType]
         );
         localStorage.setItem("categories", crypto.encrypt(res.data));
       }
     } catch (error) {
       message.error(error.message);
     }
-  }, [categories, filters.transactionType]);
+  }, [filters.transactionType]);
 
   const init = useCallback(async () => {
     getCategories();
