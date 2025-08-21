@@ -1,0 +1,133 @@
+.security-verification-container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+    Arial, sans-serif;
+}
+
+.verification-card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.verification-header {
+  text-align: center;
+  margin-bottom: 28px;
+  .icon {
+    font-size: 52px;
+    color: #0eb0c9;
+    margin-bottom: 12px;
+  }
+  h2 {
+    margin: 0 0 6px 0;
+    color: #111;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  p {
+    color: #777;
+    margin: 0;
+    font-size: 13px;
+  }
+}
+
+.question-card {
+  background: linear-gradient(90deg, #f8fbfc, #fbfeff);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  border-left: 5px solid rgba(14, 176, 201, 0.18);
+}
+
+.question-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: #0b6b72;
+  margin-bottom: 6px;
+}
+
+.question-text {
+  color: #444;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.success-card {
+  text-align: center;
+  padding: 28px 18px;
+  h3 {
+    margin: 8px 0 6px;
+    color: #222;
+    font-size: 20px;
+  }
+  p {
+    color: #666;
+    margin: 0 0 12px;
+  }
+}
+
+.question-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.question-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid #e6eef0;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #fff;
+  transition: all 0.18s ease;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(14, 176, 201, 0.06);
+    border-color: #bfeaf0;
+  }
+  &.selected {
+    border-color: #0eb0c9;
+    background: #f0fbfc;
+    box-shadow: 0 8px 22px rgba(14, 176, 201, 0.08);
+  }
+  span {
+    width: 20px;
+    display: inline-block;
+    text-align: center;
+    color: #0b6b72;
+  }
+  div {
+    flex: 1;
+    color: #222;
+    line-height: 1.4;
+  }
+}
+
+.progress-info {
+  background: #fffaf0;
+  border: 1px solid #ffe7b5;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-top: 20px;
+  font-size: 13px;
+  color: #8a4b00;
+  .title {
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+}
+
+.step-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  button {
+    flex: 1;
+  }
+}
